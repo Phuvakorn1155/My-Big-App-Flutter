@@ -186,10 +186,10 @@ class _TodoListScreenState extends State<TodoListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Make a your lists"),
-        backgroundColor: Color(0xFFFCCF68),
+        backgroundColor: Color(0xFFF3D082),
         actions: [
           IconButton(
-            icon: Icon(Icons.color_lens),
+            icon: Icon(Icons.color_lens, color: Color(0xFF3C204B) , size: 30),
             onPressed: _changeBackgroundColor,
           ),
         ],
@@ -248,10 +248,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
           );
         },
       ),
+      //https://m2.material.io/components/buttons-floating-action-button#behavior
       floatingActionButton: FloatingActionButton(
         onPressed: _addTodo,
-        backgroundColor: Color(0xFF67BBAA),
-        child: Icon(Icons.add),
+        backgroundColor: Color(0xFFB3DDD5),
+        child: Icon(Icons.add ,color: Color(0xFF141005) , size: 30),
       ),
     );
   }
