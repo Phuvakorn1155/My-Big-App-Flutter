@@ -216,18 +216,18 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 children: [
                   Text(
                     todo['text'],
-                    style: TextStyle(fontSize: 18, color: Color(0xFF100818)),
+                    style: TextStyle(fontSize: 20, color: Color(0xFF100818)),
                   ),
                   if (todo['subtitle'] != null && todo['subtitle']!.isNotEmpty)
                     Text(
                       todo['subtitle'],
-                      style: TextStyle(fontSize: 14, color: Color(0xFF6B6B6B)),
+                      style: TextStyle(fontSize: 18, color: Color(0xFF6B6B6B)),
                     ),
                   if (todo['editedTimestamp'] != null) SizedBox(height: 8),
                   if (todo['editedTimestamp'] != null)
                     Text(
                       'แก้ไขแล้วเมื่อ: ${todo['editedTimestamp']}',
-                      style: TextStyle(fontSize: 12, color: Color(0xFFCC9900)),
+                      style: TextStyle(fontSize: 14, color: Color(0xFFCC9900)),
                     ),
                 ],
               ),
