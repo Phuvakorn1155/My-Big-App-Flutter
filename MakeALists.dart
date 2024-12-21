@@ -25,56 +25,55 @@ class _TodoListScreenState extends State<TodoListScreen> {
   List<Map<String, dynamic>> _todos = [];
   Color _backgroundColor = Colors.white;
 
-  void _addTodo() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        String newTodo = "";
-        String newSubtitle = "";
-        return AlertDialog(
-          title: Text("เพิ่มรายการใหม่ของคุณที่ต้องทำ"),
-          backgroundColor: Color(0xFFFBFBF8),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                onChanged: (value) {
-                  newTodo = value;
-                },
-                decoration:
-                    InputDecoration(hintText: "ป้อนชื่อเรื่องของคุณ"), //Title
-              ),
-              SizedBox(height: 8),
-              TextField(
-                onChanged: (value) {
-                  newSubtitle = value;
-                },
-                decoration: InputDecoration(
-                    hintText: "รายละเอียด (ไม่บังคับ)"), //Subtitle
-              ),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  if (newTodo.isNotEmpty) {
-                    _todos.add({
-                      'text': newTodo,
-                      'subtitle': newSubtitle,
-                      'editedTimestamp': null,
-                    });
-                  }
-                  Navigator.pop(context);
-                });
+ void _addTodo() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String newTodo = "";
+      String newSubtitle = "";
+      return AlertDialog(
+        title: Text("เพิ่มรายการใหม่ของคุณที่ต้องทำ"),
+        backgroundColor: Color(0xFFFBFBF8),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              onChanged: (value) {
+                newTodo = value;
               },
-              child: Text("เพิ่ม"),
+              decoration: InputDecoration(hintText: "ป้อนชื่อเรื่องของคุณ"),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              onChanged: (value) {
+                newSubtitle = value;
+              },
+              decoration: InputDecoration(hintText: "รายละเอียด (ไม่บังคับ)"),
             ),
           ],
-        );
-      },
-    );
-  }
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                if (newTodo.isNotEmpty) {
+                  _todos.add({
+                    'text': newTodo,
+                    'subtitle': newSubtitle,
+                    'timestamp': DateTime.now().toString(), // เพิ่มเวลาโพสต์
+                    'editedTimestamp': null,
+                  });
+                }
+                Navigator.pop(context);
+              });
+            },
+            child: Text("เพิ่ม"),
+          ),
+        ],
+      );
+    },
+  );
+}
 
   void _editTodo(int index) {
     showDialog(
@@ -218,12 +217,18 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     todo['text'],
                     style: TextStyle(fontSize: 20, color: Color(0xFF100818)),
                   ),
+                 
                   if (todo['subtitle'] != null && todo['subtitle']!.isNotEmpty)
-                    Text(
+                 
+                                     Text(
                       todo['subtitle'],
                       style: TextStyle(fontSize: 18, color: Color(0xFF6B6B6B)),
                     ),
-                  if (todo['editedTimestamp'] != null) SizedBox(height: 8),
+                   Text(
+                                     'โพสต์เมื่อ: ${todo['timestamp']  } ', // แสดงเวลาโพสต์
+                    style: TextStyle(fontSize: 14, color: Color(0xFF003442)),
+                  ),
+                                   if (todo['editedTimestamp'] != null) SizedBox(height: 4),
                   if (todo['editedTimestamp'] != null)
                     Text(
                       'แก้ไขแล้วเมื่อ: ${todo['editedTimestamp']}',
